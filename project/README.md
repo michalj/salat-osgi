@@ -6,13 +6,13 @@ OSGi packaging for Salat and Mongo (Casbah)
 How to use it
 =============
 
-** In your build.sbt **
+In your build.sbt:
 ```scala
 libraryDependencies += "com.novus" % "salat_2.9.1" % "1.9.1"
 ```
 In your OSGi container use salat-osgi bundle from this repo.
 
-** You need to use your own Salat Context **
+You need to use your own Salat Context:
 ```scala
 import com.novus.salat.dao.SalatDAO
 import com.mongodb.casbah.MongoConnection
