@@ -9,7 +9,7 @@ object SalatOsgiBuild extends Build {
     settings = Project.defaultSettings ++ osgiSettings ++ releaseSettings ++ Seq(
       name := "salat-osgi",
       organization := "eu.semantiq.common",
-      scalaVersion := "2.9.1",
+      scalaVersion := "2.10.1",
       OsgiKeys.exportPackage ++= Seq(
         "com.mongodb",
         "com.mongodb.casbah",
@@ -19,7 +19,9 @@ object SalatOsgiBuild extends Build {
         "com.novus.salat.global",
         "com.novus.salat.json",
         "com.novus.salat.util",
+        "com.novus.salat.transformers",
         "net.liftweb.json",
+        "org.json4s",
         "scala.tools.scalap.scalax.rules.scalasig"),
       OsgiKeys.importPackage ++= Seq(
         "org.aopalliance.aop",
@@ -42,6 +44,10 @@ object SalatOsgiBuild extends Build {
         "org.apache.tools.ant.taskdefs;resolution:=optional",
         "org.apache.tools.ant.types;resolution:=optional",
         "org.apache.tools.ant.util;resolution:=optional",
+
+        "org.apache.tools.ant.util.facade;resolution:=optional",
+        "sun.misc;resolution:=optional",
+
         "scala.tools.jline;resolution:=optional",
         "scala.tools.jline.console;resolution:=optional",
         "scala.tools.jline.console.history;resolution:=optional",
@@ -49,11 +55,12 @@ object SalatOsgiBuild extends Build {
       OsgiKeys.embeddedJars <<= Keys.externalDependencyClasspath in Compile map {
         deps =>
           val jarNames = Seq("paranamer", "salat", "casbah", "mongo", "scalaj",
-              "scalap", "scala-compiler", "commons-httpclient", "commons-codec",
+              "scalap", "commons-httpclient", "commons-codec", "json4s",
               "lift-json")
           deps filter (d => jarNames exists (jar => d.data.getName startsWith jar)) map (d => d.data)
       },
+      resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies ++= Seq(
-        "com.novus" % "salat_2.9.1" % "1.9.1",
-        "org.scala-lang" % "scala-compiler" % "2.9.1")))
+        "com.novus" %% "salat" % "1.9.2-SNAPSHOT",
+        "org.scala-lang" % "scala-compiler" % "2.10.1")))
 }
