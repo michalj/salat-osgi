@@ -22,7 +22,9 @@ object SalatOsgiBuild extends Build {
         "com.novus.salat.transformers",
         "net.liftweb.json",
         "org.json4s",
-        "scala.tools.scalap.scalax.rules.scalasig"),
+        "scala.tools.scalap.scalax.rules.scalasig",
+        "com.mongodb.casbah.gridfs",
+        "org.bson.types;version=\"[2.11,3)\""),
       OsgiKeys.importPackage ++= Seq(
         "org.aopalliance.aop",
         "net.sf.cglib.proxy;version=\"[2,3)\"",
