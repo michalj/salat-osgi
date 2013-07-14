@@ -24,7 +24,8 @@ object SalatOsgiBuild extends Build {
         "org.json4s",
         "scala.tools.scalap.scalax.rules.scalasig",
         "com.mongodb.casbah.gridfs",
-        "org.bson.types"),
+        "org.bson.types",
+	"com.mongodb.gridfs"),
       OsgiKeys.importPackage ++= Seq(
         "org.aopalliance.aop",
         "net.sf.cglib.proxy;version=\"[2,3)\"",
@@ -58,11 +59,12 @@ object SalatOsgiBuild extends Build {
         deps =>
           val jarNames = Seq("paranamer", "salat", "casbah", "mongo", "scalaj",
               "scalap", "commons-httpclient", "commons-codec", "json4s",
-              "lift-json")
+              "lift-json", "casbah-gridfs")
           deps filter (d => jarNames exists (jar => d.data.getName startsWith jar)) map (d => d.data)
       },
       resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies ++= Seq(
         "com.novus" %% "salat" % "1.9.2-SNAPSHOT",
-        "org.scala-lang" % "scala-compiler" % "2.10.1")))
+        "org.scala-lang" % "scala-compiler" % "2.10.1",
+        "org.mongodb" % "casbah-gridfs_2.10" % "2.6.2")))
 }
